@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>To do list</title>
+<link rel="stylesheet" href="css/list.css">
+<style>
+    * {
+    box-sizing:border-box;
+}
+#wrapper {
+    width:600px;
+    margin:0 auto;
+}
+h2 {
+    text-align:center;
+}
+form {
+    background-color:#007acc;
+    padding:30px 40px;
+    color:white;
+    text-align:center;
+}
+input {
+    border:none; 
+    width:440px;
+    padding:10px;
+    float:left;
+    font-size:16px;
+}
+.addBtn {
+    padding:10px;
+    width:50px;
+    border:none;
+    background-color:#fff;
+    box-shadow:1px 2px 4px #167dae;
+    color:#555; 
+    text-align:center;
+    font-size:14px;
+    cursor:pointer;
+    transition:0.3;
+}
+form::after {
+    content:"";
+    display:table;
+    clear:both;
+}
+form::after {
+    content:"";
+    display:table;
+    clear:both;
+}
+ul{
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+ul li{
+    cursor:pointer;
+    position://부모요소로 저장
+    padding:12px 8px 12px 40px;
+    background: #eee;
+    font-size:18px;
+    transition: 0.2s;
+}
+ul li:nth-child(odd) {
+    background-color:#f9f9f9;
+}
+ul li:hover {
+    background-color:#ddd;
+}
+.close {
+    position:
+    right:0;
+    top:0;
+    padding:12px 16px;
+    border:none;
+    background:rgba(255,255,255,0)
+}
+.close:hover {
+    background-color:#007acc;
+    color:white;
+}
+</style>
+</head>
+<body>
+    <div id="wrapper">
+        <h2>여행 준비물 점검 목록</h2>
+        <form>
+            <input type="text" id="item" autofocus="true">
+            <button type="button" id="add" class="addBtn">추가</button>
+        </form>
+        <div id="itemList"></div>
+    </div>
+
+    <script>
+        let itemList = [];  // Initialize the itemList array
+
+        // Get references to HTML elements
+        let addBtn = document.getElementById("add");
+        let itemInput = document.getElementById("item");
+        let itemListDiv = document.getElementById("itemList");
+
+        // Add event listener to the "Add" button
+        addBtn.addEventListener("click", addList);
+
+        // Function to add an item to the list
+        function addList() {
+            let item = itemInput.value; // Get the input field value
+            if (item.trim() !== "") {
+                itemList.push(item); // Add the item to the itemList array
+                itemInput.value = ""; // Clear the input field
+                itemInput.focus(); // Focus on the input field
+                showList(); // Display the updated list
+            }
+        }
+
+        // Function to display the list
+        function showList() {
+            let list = "<ul>"; // Start the list with an <ul> tag
+            for (let i = 0; i < itemList.length; i++) {
+                list += "<li>" + itemList[i] + "<span class='close' id='" + i + "'>X</span></li>";
+            }
+            list += "</ul>"; // End the list with a </ul> tag
+            itemListDiv.innerHTML = list; // Update the itemListDiv with the list
+
+            let remove = document.querySelectorAll(".close"); // Get references to all close buttons
+            for (let i = 0; i < remove.length; i++) {
+                remove[i].addEventListener("click", removeList); // Add click event listener to each close button
+            }
+        }
+
+        // Function to remove an item from the list
+        function removeList() {
+            let id = this.getAttribute("id"); // Get the ID of the clicked close button
+            itemList.splice(id, 1); // Remove the item from the itemList array
+            showList(); // Display the updated list
+        }
+
+        // Initial display of the list
+        showList();
+    </script>
+</body>
+</html>
