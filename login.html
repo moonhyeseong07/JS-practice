@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <style>
+        로그인 form CSS
+
+*{
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+body{
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.login-wrapper{
+    width: 400px;
+    height: 350px;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.login-wrapper > h2{
+    font-size: 24px;
+    color: #6A24FE;
+    margin-bottom: 20px;
+}
+#login-form > input{
+    width: 100%;
+    height: 48px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    border-radius: 6px;
+    background-color: #F8F8F8;
+}
+#login-form > input::placeholder{
+    color: #D2D2D2;
+}
+#login-form > input[type="submit"]{
+    color: #fff;
+    font-size: 16px;
+    background-color: #6A24FE;
+    margin-top: 20px;
+}
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <h2>로그인</h2>
+        <form id="login-form" action="success.html" onsubmit="return validateForm()">
+            <input type="email" id="email" placeholder="email">
+            <input type="password" id="password" placeholder="password">
+            <input type="submit" value="Login">
+            <input type="reset" value="취소">
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            
+            const emailValue = emailInput.value.trim();
+            const passwordValue = passwordInput.value.trim();
+            
+            if (emailValue === '' || passwordValue === '') {
+                alert('빈 칸을 채워주세요.');
+                return false; 
+            }
+            
+            if (passwordValue.length > 8) {
+                alert('비밀번호는 8자를 초과할 수 없습니다.');
+                return false; 
+            }
+        }
+    </script>
+</body>
+</html>
