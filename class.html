@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>연습문제 2</title>
+    <style>
+        #container {
+            width: 600px;
+            margin: 10px auto;
+        }
+
+        fieldset {
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            margin: 10px;
+        }
+
+        /* label 텍스트 스타일 */
+        li label {
+            width: 120px;
+            line-height: 36px;
+            float: left;
+            font-weight: bold;
+        }
+
+        /* 텍스트 필드 스타일 */
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 300px;
+            height: 30px;
+        }
+
+        /* 버튼 스타일 */
+        #buttons {
+            width: 400px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        #buttons input {
+            width: 150px;
+            height: 50px;
+            font-size: 20px;
+        }
+
+        #buttons input:hover {
+            background-color: rgb(27, 134, 221);
+            color: #fff;
+            border-color: #fff;
+        }
+
+        /* 드롭다운 메뉴 스타일 */
+        select {
+            width: 100px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>회원가입을 환영합니다</h1>
+        <form>
+            <fieldset>
+                <legend>사용자 정보</legend>
+                <ul>
+                    <li>
+                        <label for="uid">아이디 </label>
+                        <input type="text" id="uid" placeholder="4자 ~ 10자 사이, 공백 없이">
+                    </li>
+                    <li>
+                        <label for="uemail">이메일 </label>
+                        <input type="email" id="uemail">
+                    </li>
+                    <li>
+                        <label for="upw">비밀번호 </label>
+                        <input type="password" id="upw" placeholder="문자와 숫자, 특수 기호 포함">
+                    </li>
+                    <li>
+                        <label for="upwc">비밀번호 확인 </label>
+                        <input type="password" id="upwcheck">
+                    </li>
+                    <li>
+                        <label for="in">가입 경로</label>
+                        <select id="in">
+                            <option value="blog">블로그</option>
+                            <option value="search">검색</option>
+                            <option value="sns">SNS</option>
+                            <option value="other">기타</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="clas">회원등급</label>
+                        <select id="clas" onchange="change()">
+                            <option value="1">초급</option>
+                            <option value="2">중급</option>
+                            <option value="3">고급</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="mny">연회비 </label>
+                        <input type="text" id="mny" value="5000">
+                    </li>
+                    <li>
+                        <label for="memo">메모</label>
+                        <textarea id="memo" placeholder="하고싶은 말이 있다면 여기에"></textarea>
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <legend>이벤트의 새로운 소식</legend>
+                <label><input type="radio" name="mail">메일 수신</label>
+                <label><input type="radio" value="메일 수신 안함" name="mail" checked>메일 수신 안함</label>
+            </fieldset>
+            <div id="buttons">
+                <input type="button" onclick="checkField()" id="buttons" value="가입하기">
+                <input type="reset" id="buttons" value="취소">
+            </div>
+            <fieldset>
+                <legend>사용자 정보</legend>
+                <ul>
+                    <li>
+                        <label for="uid2">아이디 </label>
+                        <input type="text" id="uid2">
+                    </li>
+                    <li>
+                        <label for="uemail2">이메일 </label>
+                        <input type="email" id="uemail2">
+                    </li>
+                    <li>
+                        <label for="in2">가입 경로</label>
+                        <select id="in2">
+                            <option value="blog">블로그</option>
+                            <option value="search">검색</option>
+                            <option value="sns">SNS</option>
+                            <option value="other">기타</option>
+                        </select>
+                    </li>
+                </ul>
+            </fieldset>
+        </form>
+    </div>
+</body>
+<script>
+    function checkField() {
+        var uid = document.getElementById("uid").value;
+        var uemail = document.getElementById("uemail").value;
+        var upw = document.getElementById("upw").value;
+        var upwcheck = document.getElementById("upwcheck").value;
+        var ain = document.getElementById("in");
+        var uid2 = document.getElementById("uid2");
+        var uemail2 = document.getElementById("uemail2");
+        var ain2 = document.getElementById("in2");
+
+        if (!uid) {
+            alert("아이디를 입력하세요");
+            uid.focus();
+            return false;
+        }
+        else if (!uemail) {
+            alert("이메일을 입력하세요");
+            uemail.focus();
+            return false;
+        }
+        else if (!upw) {
+            alert("비밀번호를 입력하세요");
+            upw.focus();
+            return false;
+        }
+        else if (upw!=upwcheck){
+            alert("비밀번호를 다시 확인하세요");
+            upwcheck.focus();
+            return false;
+        }
+        else if (!upwcheck) {
+            alert("비밀번호 확인을 입력하세요");
+            upwcheck.focus();
+            return false;
+        }
+        else {
+            uid2.value = uid;
+            uemail2.value = uemail;
+            ain2.value = ain.value;
+        }
+    }
+    var clas = document.getElementById("clas");
+    var mny = document.getElementById("mny");
+    clas.onchange = function () {
+        var select = clas.value;
+        if (select == 1)
+            mny.value = "5000";
+        else if (select == 2)
+            mny.value = "10000";
+        else if (select == 3)
+            mny.value = "15000";
+    }
+
+
+</script>
+
+</html>
